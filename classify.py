@@ -16,12 +16,12 @@ data = pd.read_csv('data.txt', sep='\t', names=['sp', 'complexity', 'label', 'p1
 X = data[['sp', 'complexity']].values
 y = data['label'].values
 #check
-#检查数据的不平衡问题， 是否已自动解决
+
 from sklearn.model_selection import train_test_split
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.5, random_state=0)
 print(len(y) / sum(y), len(y_train) / sum(y_train), len(y_test) / sum(y_test))
 import numpy as np
-#半监督分类
+
 import matplotlib.pyplot as plt
 from sklearn import datasets
 from sklearn.svm import SVC
@@ -119,8 +119,7 @@ for i, (clf,y_train,title) in enumerate(classifiers):
 plt.savefig('pic.pdf', dpi=300)
 plt.show()
 #SVM
-#可将 cv=k里的
-#k换成2， 2-fold
+
 clf = svm.SVC(kernel='linear')
 scores = cross_val_score(clf, X, y, cv=3)
 clf = svm.SVC(kernel='linear')
@@ -162,7 +161,7 @@ y_pred
 print(sum(y_pred == y) / size, sum(1 - y_pred == y) / size)
 plt.scatter(X[:, 0], X[:, 1], c=y_pred, s=2)
 #normalize data
-#在这里没明显作用， SVM结果的方差变小
+
 from sklearn import preprocessing
 scaler = preprocessing.StandardScaler().fit(X)
 X_scaled = scaler.transform(X)
